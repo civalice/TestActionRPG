@@ -1,0 +1,9 @@
+/Library
+/Logs
+/Temp
+/.vs
+/.vsconfig
+/Assembly-CSharp.csproj
+/obj
+/UserSettings/
+/Urnique.sln
