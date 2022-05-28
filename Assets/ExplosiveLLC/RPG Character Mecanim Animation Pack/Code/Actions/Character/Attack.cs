@@ -62,7 +62,8 @@ namespace RPGCharacterAnims.Actions
 					controller.hasLeftWeapon,
 					controller.hasRightWeapon,
 					controller.hasDualWeapons,
-					controller.hasTwoHandedWeapon
+					controller.hasTwoHandedWeapon,
+                    duration
 				);
 				EndAction(controller);
 			}

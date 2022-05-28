@@ -17,10 +17,10 @@ TagManager:
   - 
   - TempCast
   - Walkable
-  - 
-  - 
-  - 
-  - 
+  - PlayerAttackBox
+  - EnemyAttackbox
+  - PlayerHitBox
+  - EnemyHitbox
   - 
   - 
   - 

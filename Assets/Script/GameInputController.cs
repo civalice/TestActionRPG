@@ -14,6 +14,7 @@ namespace Urnique.GamePlay
     {
         RPGCharacterController rpgCharacterController;
 
+        private RPGCharacterAnimatorEvents characterEvents;
         private Vector2 inputMovement;
         private bool inputMelee;
         private bool inputRange;
@@ -36,14 +37,19 @@ namespace Urnique.GamePlay
         // Start is called before the first frame update
         void Start()
         {
-
+            characterEvents = rpgCharacterController.GetAnimatorTarget().GetComponent<RPGCharacterAnimatorEvents>();
+            characterEvents.OnHit.AddListener(Hit);
         }
 
         private void OnEnable()
-        { GameInputSystem.Enable(); }
+        {
+            GameInputSystem.Enable();
+        }
 
         private void OnDisable()
-        { GameInputSystem.Disable(); }
+        {
+            GameInputSystem.Disable();
+        }
 
         // Update is called once per frame
         private void Update()
@@ -87,22 +93,31 @@ namespace Urnique.GamePlay
 
         private void Aiming()
         {
-            if (rpgCharacterController.hasAimedWeapon)
+            if (inputRange)
             {
-                if (rpgCharacterController.HandlerExists(HandlerTypes.Aim))
+                rpgCharacterController.TryStartAction(HandlerTypes.Face);
+                rpgCharacterController.StartAction(HandlerTypes.AttackCast,
+                    new AttackCastContext(AnimationVariations.AttackCast.TakeRandom(), Side.Right));
+                // Get world position from mouse position on screen and convert to direction from character.
+                Plane playerPlane = new Plane(Vector3.up, transform.position);
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                float hitdist = 0.0f;
+                if (playerPlane.Raycast(ray, out hitdist))
                 {
-                    if (HasRangeInput())
-                    {
-                        rpgCharacterController.TryStartAction(HandlerTypes.Aim);
-                    }
-                    else
-                    {
-                        rpgCharacterController.TryEndAction(HandlerTypes.Aim);
-                    }
+                    Vector3 targetPoint = ray.GetPoint(hitdist);
+                    Vector3 lookTarget = new Vector3(targetPoint.x - transform.position.x,
+                        transform.position.z - targetPoint.z, 0);
+                    rpgCharacterController.SetFaceInput(lookTarget);
+                }
+            }
+            else
+            {
+                if (rpgCharacterController.CanEndAction(HandlerTypes.AttackCast) && rpgCharacterController.isCasting)
+                {
+                    rpgCharacterController.EndAction(HandlerTypes.AttackCast);
                 }
 
-                // Finally, set aim location and bow pull.
-                rpgCharacterController.SetAimInput(rpgCharacterController.target.position);
+                rpgCharacterController.TryEndAction(HandlerTypes.Face);
             }
         }
 
@@ -140,6 +155,15 @@ namespace Urnique.GamePlay
             }
 
             rpgCharacterController.StartAction("DiveRoll", 1);
+        }
+
+        public void Hit()
+        {
+        }
+
+        private void OnTriggerEnter(Collider collide)
+        {
+            Debug.Log("My Trigger So what?");
         }
     }
 }
