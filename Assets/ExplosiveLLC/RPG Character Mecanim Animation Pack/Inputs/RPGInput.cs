@@ -461,6 +461,134 @@ namespace RPGCharacterAnims
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TestGaming"",
+            ""id"": ""6fbf2e1a-6953-4682-bf1e-7550c3637120"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""9702551a-a08f-43d2-bab7-8740063c2b0c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""08aaa553-dc73-4d4d-b2c3-5adc28041431"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""e44987b2-9c26-457b-b8ee-869f32a115ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Range"",
+                    ""type"": ""Button"",
+                    ""id"": ""9edd5eb1-d4f4-46dd-bec7-5ec53cf2fc77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""fe11930f-f6d5-4d70-b739-2f0c58561ddf"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d4d1b828-553d-4250-866d-20cf0a43e409"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""37989128-0897-46db-afe8-d53af68a1f3c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3198ca1f-add2-4c79-a07d-2b50b158a56d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""53be1992-ff08-44e7-9cda-4da8b87fb348"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56d146aa-cfff-440f-9be7-bdd28390e5fb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""518f59c7-7f1b-4a8d-8dad-e898e380b0c6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e368bfcb-1d0c-4478-928f-4e559bca7172"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Range"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -508,6 +636,12 @@ namespace RPGCharacterAnims
             m_RPGCharacter_WeaponLeft = m_RPGCharacter.FindAction("WeaponLeft", throwIfNotFound: true);
             m_RPGCharacter_WeaponRight = m_RPGCharacter.FindAction("WeaponRight", throwIfNotFound: true);
             m_RPGCharacter_WeaponUp = m_RPGCharacter.FindAction("WeaponUp", throwIfNotFound: true);
+            // TestGaming
+            m_TestGaming = asset.FindActionMap("TestGaming", throwIfNotFound: true);
+            m_TestGaming_Move = m_TestGaming.FindAction("Move", throwIfNotFound: true);
+            m_TestGaming_Roll = m_TestGaming.FindAction("Roll", throwIfNotFound: true);
+            m_TestGaming_Melee = m_TestGaming.FindAction("Melee", throwIfNotFound: true);
+            m_TestGaming_Range = m_TestGaming.FindAction("Range", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -730,6 +864,63 @@ namespace RPGCharacterAnims
             }
         }
         public RPGCharacterActions @RPGCharacter => new RPGCharacterActions(this);
+
+        // TestGaming
+        private readonly InputActionMap m_TestGaming;
+        private ITestGamingActions m_TestGamingActionsCallbackInterface;
+        private readonly InputAction m_TestGaming_Move;
+        private readonly InputAction m_TestGaming_Roll;
+        private readonly InputAction m_TestGaming_Melee;
+        private readonly InputAction m_TestGaming_Range;
+        public struct TestGamingActions
+        {
+            private @RPGInputs m_Wrapper;
+            public TestGamingActions(@RPGInputs wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_TestGaming_Move;
+            public InputAction @Roll => m_Wrapper.m_TestGaming_Roll;
+            public InputAction @Melee => m_Wrapper.m_TestGaming_Melee;
+            public InputAction @Range => m_Wrapper.m_TestGaming_Range;
+            public InputActionMap Get() { return m_Wrapper.m_TestGaming; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(TestGamingActions set) { return set.Get(); }
+            public void SetCallbacks(ITestGamingActions instance)
+            {
+                if (m_Wrapper.m_TestGamingActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMove;
+                    @Roll.started -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRoll;
+                    @Roll.performed -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRoll;
+                    @Roll.canceled -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRoll;
+                    @Melee.started -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMelee;
+                    @Melee.performed -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMelee;
+                    @Melee.canceled -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnMelee;
+                    @Range.started -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRange;
+                    @Range.performed -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRange;
+                    @Range.canceled -= m_Wrapper.m_TestGamingActionsCallbackInterface.OnRange;
+                }
+                m_Wrapper.m_TestGamingActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Roll.started += instance.OnRoll;
+                    @Roll.performed += instance.OnRoll;
+                    @Roll.canceled += instance.OnRoll;
+                    @Melee.started += instance.OnMelee;
+                    @Melee.performed += instance.OnMelee;
+                    @Melee.canceled += instance.OnMelee;
+                    @Range.started += instance.OnRange;
+                    @Range.performed += instance.OnRange;
+                    @Range.canceled += instance.OnRange;
+                }
+            }
+        }
+        public TestGamingActions @TestGaming => new TestGamingActions(this);
         private int m_GamepadSchemeIndex = -1;
         public InputControlScheme GamepadScheme
         {
@@ -769,6 +960,13 @@ namespace RPGCharacterAnims
             void OnWeaponLeft(InputAction.CallbackContext context);
             void OnWeaponRight(InputAction.CallbackContext context);
             void OnWeaponUp(InputAction.CallbackContext context);
+        }
+        public interface ITestGamingActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnRoll(InputAction.CallbackContext context);
+            void OnMelee(InputAction.CallbackContext context);
+            void OnRange(InputAction.CallbackContext context);
         }
     }
 }
