@@ -8,13 +8,13 @@ using RPGCharacterAnims.Lookups;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Urnique.GamePlay
+namespace Urxxxxx.GamePlay
 {
     public class GameInputController : MonoBehaviour
     {
         RPGCharacterController rpgCharacterController;
+        private Player player;
 
-        private RPGCharacterAnimatorEvents characterEvents;
         private Vector2 inputMovement;
         private bool inputMelee;
         private bool inputRange;
@@ -31,14 +31,13 @@ namespace Urnique.GamePlay
         void Awake()
         {
             rpgCharacterController = GetComponent<RPGCharacterController>();
+            player = GetComponent<Player>();
             GameInputSystem = new @RPGInputs();
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            characterEvents = rpgCharacterController.GetAnimatorTarget().GetComponent<RPGCharacterAnimatorEvents>();
-            characterEvents.OnHit.AddListener(Hit);
         }
 
         private void OnEnable()
@@ -107,6 +106,7 @@ namespace Urnique.GamePlay
                     Vector3 targetPoint = ray.GetPoint(hitdist);
                     Vector3 lookTarget = new Vector3(targetPoint.x - transform.position.x,
                         transform.position.z - targetPoint.z, 0);
+                    player.SetTargetPosition(targetPoint);
                     rpgCharacterController.SetFaceInput(lookTarget);
                 }
             }
@@ -117,6 +117,7 @@ namespace Urnique.GamePlay
                     rpgCharacterController.EndAction(HandlerTypes.AttackCast);
                 }
 
+                player.ResetTarget();
                 rpgCharacterController.TryEndAction(HandlerTypes.Face);
             }
         }
@@ -157,13 +158,5 @@ namespace Urnique.GamePlay
             rpgCharacterController.StartAction("DiveRoll", 1);
         }
 
-        public void Hit()
-        {
-        }
-
-        private void OnTriggerEnter(Collider collide)
-        {
-            Debug.Log("My Trigger So what?");
-        }
     }
 }
