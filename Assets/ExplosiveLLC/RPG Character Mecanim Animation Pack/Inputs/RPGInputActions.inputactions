@@ -348,6 +348,17 @@
                 },
                 {
                     "name": "",
+                    "id": "f4911d73-40aa-4e7a-bfd1-8793402186da",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Death",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f11c46ab-cc0b-4bff-8583-9afa124803f9",
                     "path": "<Keyboard>/space",
                     "interactions": "",

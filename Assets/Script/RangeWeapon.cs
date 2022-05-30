@@ -9,7 +9,7 @@ namespace Urxxxxx.GamePlay
     {
         [SerializeField] public SimpleBullet BulletPrefab;
 
-        public float FireRate = 0.1f;
+        public float FireRate => GameController.Instance.FireRate;
         private float m_timing = 0;
 
         public Vector3 TargetPosition;
@@ -48,6 +48,11 @@ namespace Urxxxxx.GamePlay
                 var bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
                 var bulletComponent = bullet.GetComponent<SimpleBullet>();
                 bullet.gameObject.layer = Layer.PlayerAttackBox;
+                bullet.Damage = GameController.Instance.BaseDamage;
+                bullet.BulletRange = GameController.Instance.BaseBulletRange;
+                bullet.BulletSpeed = GameController.Instance.BaseBulletSpeed;
+                bullet.BulletAccuracy = GameController.Instance.BaseAccuracy;
+                bullet.Force = GameController.Instance.BaseForce;
                 bulletComponent.SetBulletTarget(transform.position, TargetPosition);
             }
         }

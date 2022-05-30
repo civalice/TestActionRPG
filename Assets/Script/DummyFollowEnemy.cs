@@ -52,7 +52,7 @@ namespace Urxxxxx.GamePlay
                 {
                     player.DamageTaken(Damage);
                 }
-                Destroy(gameObject);
+                GameController.Instance.Kill(gameObject);
             }
         }
     }

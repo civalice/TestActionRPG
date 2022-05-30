@@ -13,7 +13,7 @@ namespace Urxxxxx.GamePlay
 
         protected virtual void Death()
         {
-            Destroy(gameObject);
+            GameController.Instance.Kill(gameObject);
         }
     }
 }

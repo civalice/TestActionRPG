@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1affc6ed4f0f08469d53cb9804dc523, type: 3}
+  m_Name: DefaultGameSetting
+  m_EditorClassIdentifier: 
+  MaxSpawn: 3
+  PlayerMaxHp: 100
+  MeleeDamage: 5
+  MeleeForce: 2
+  MeleeRange: 2
+  BaseDamage: 1
+  BaseForce: 2
+  BaseBulletSpeed: 60
+  BaseBulletRange: 40
+  BaseAccuracy: 92

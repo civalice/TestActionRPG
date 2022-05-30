@@ -54,6 +54,12 @@ namespace Urxxxxx.GamePlay
         private void Update()
         {
             Inputs();
+            if (!GameController.Instance.IsStart)
+            {
+                if (inputDash) GameController.Instance.StartGame();
+                return;
+            }
+
             Moving();
             Dash();
             Attacking();

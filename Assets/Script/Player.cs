@@ -12,8 +12,10 @@ namespace Urxxxxx.GamePlay
         RPGCharacterController rpgCharacterController;
 
         public float CurrentHp = 100;
+        public int MaxHp => GameController.Instance.PlayerMaxHp;
         public RangeWeapon Weapon;
 
+        public bool IsDead => CurrentHp <= 0;
         public void SetTargetPosition(Vector3 target)
         {
             Vector3 targetVector = new Vector3(target.x, Weapon.transform.position.y, target.z);
@@ -39,6 +41,12 @@ namespace Urxxxxx.GamePlay
         void Update()
         {
             Weapon.UpdateWeapon();
+        }
+
+        public void Reset()
+        {
+            CurrentHp = MaxHp;
+            rpgCharacterController.TryEndAction(HandlerTypes.Death);
         }
 
         public virtual void DamageTaken(float damage)
