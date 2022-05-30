@@ -84,11 +84,5 @@ namespace Urxxxxx.GamePlay
         {
             return collider.bounds.Contains(m_previousFramePosition) || collider.bounds.Contains(transform.position);
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawLine(BulletStartPosition, BulletStartPosition + BulletDirection * 5);
-            Handles.Label(BulletStartPosition, $"{BulletDirection}");
-        }
     }
 }

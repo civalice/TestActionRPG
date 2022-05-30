@@ -12,6 +12,8 @@ namespace Urxxxxx.GamePlay
         public List<GameObject> SpawnList = new List<GameObject>();
         public GameObject Player;
         public List<GameObject> CurrentSpawnList = new List<GameObject>();
+        private int additionalSpawn = 0;
+        private double timer = 0;
 
         public bool IsStart = false;
             // Start is called before the first frame update
@@ -25,7 +27,9 @@ namespace Urxxxxx.GamePlay
         {
             if (!IsStart) return;
             if (SpawnList.Count <= 0) return;
-            if (CurrentSpawnList.Count < GameController.Instance.MaxSpawn)
+            timer += Time.deltaTime;
+            additionalSpawn = (int)(timer / 30f);
+            if (CurrentSpawnList.Count < GameController.Instance.MaxSpawn + additionalSpawn)
             {
                 //Spawn from SpawnList
                 GameObject spawnPrefab = SpawnList.RandomItem();
@@ -55,6 +59,8 @@ namespace Urxxxxx.GamePlay
         public void Reset()
         {
             Clear();
+            additionalSpawn = 0;
+            timer = 0;
         }
 
         public void StartSpawn()
