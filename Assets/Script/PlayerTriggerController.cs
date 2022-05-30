@@ -69,7 +69,7 @@ namespace Urxxxxx.GamePlay
 
         private void OnTriggerExit(Collider col)
         {
-            if (col.gameObject == hitTarget)
+            if (col == hitTarget)
             {
                 hitTarget = null;
             }
