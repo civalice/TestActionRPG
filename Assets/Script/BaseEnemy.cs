@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Urxxxxx.GamePlay
 {
-    public abstract class IEnemy : MonoBehaviour
+    public abstract class BaseEnemy : MonoBehaviour
     {
         public virtual void DamageTaken(float damage) { }
         protected virtual void Death()

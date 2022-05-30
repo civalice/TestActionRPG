@@ -19,12 +19,12 @@ TagManager:
   - Walkable
   - PlayerAttackBox
   - EnemyAttackbox
+  - NuetralAttackBox
+  - 
+  - 
   - PlayerHitBox
-  - EnemyHitbox
-  - 
-  - 
-  - 
-  - 
+  - EnemyHitBox
+  - NeutralHitBox
   - 
   - 
   - 

@@ -14,7 +14,11 @@ namespace Urxxxxx.GamePlay
 
         private bool isHitEnable = false;
 
-        private GameObject hitTarget = null;
+        private Collider hitTarget = null;
+
+        public GameObject TriggerObject;
+        public GameObject HitPrefabs;
+        public int MeleeDamage = 5;
 
         void Awake()
         {
@@ -33,7 +37,6 @@ namespace Urxxxxx.GamePlay
         {
             if (rpgCharacterController.canAction)
             {
-                hitTarget = null;
                 isHitEnable = false;
             }
         }
@@ -43,7 +46,6 @@ namespace Urxxxxx.GamePlay
             if (hitTarget != null)
             {
                 AttackEnemy();
-                hitTarget = null;
             }
             else
             {
@@ -53,18 +55,15 @@ namespace Urxxxxx.GamePlay
 
         private void OnTriggerEnter(Collider col)
         {
-            Debug.Log($"Enter Trigger = true and {col.gameObject.name}/{col.gameObject.layer},{Layer.EnemyHitBox}");
-
-            if (col.gameObject.layer == Layer.EnemyHitBox)
+            int layerTarget = CollisionSystem.GetHitBoxLayerMask(gameObject.layer);
+            if ((1 << col.gameObject.layer & layerTarget) != 0)
             {
-                hitTarget = col.gameObject;
+                hitTarget = col;
                 if (isHitEnable)
                 {
                     AttackEnemy();
                     hitTarget = null;
                 }
-
-                Debug.Log("Enter Trigger = true");
             }
         }
 
@@ -78,7 +77,16 @@ namespace Urxxxxx.GamePlay
 
         private void AttackEnemy()
         {
-            Debug.LogWarning($"Attack Enemy : {hitTarget.name}");
+            var enemy = hitTarget.GetComponent<BaseEnemy>();
+            if (enemy != null)
+            {
+                var randomVal = 0.02f;
+
+                var hitEffect = Instantiate(HitPrefabs,
+                    TriggerObject.transform.position + new Vector3(Random.Range(-randomVal, randomVal),
+                        Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal)), Quaternion.identity);
+                enemy.DamageTaken(MeleeDamage);
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Urxxxxx.GamePlay
 {
 
-    public class DummyEnemy : IEnemy
+    public class DummyBaseEnemy : BaseEnemy
     {
         public float MaxHP = 30;
         protected float CurrentHP;

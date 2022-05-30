@@ -44,7 +44,7 @@ namespace Urxxxxx.GamePlay
             m_previousFramePosition = transform.position;
             transform.position += BulletDirection * BulletSpeed * Time.deltaTime;
             //bool isHit = Physics.Raycast(BulletStartPosition, BulletDirection, BulletRange, Layer.EnemyHitBox);
-            int layerMask = 1 << Layer.Walkable | 1 << Layer.EnemyHitBox;
+            int layerMask = 1 << Layer.Walkable | CollisionSystem.GetHitBoxLayerMask(gameObject.layer);
             bool isHit = Physics.Raycast(BulletStartPosition, BulletDirection, out RaycastHit hit, BulletRange, layerMask);
             // If it hits something...
             if (isHit)
@@ -52,12 +52,11 @@ namespace Urxxxxx.GamePlay
                 //calculate collider range
                 if (IsBetweenPreviousFrame(hit.point) || IsPointInsideCollider(hit.collider))
                 {
-                    var rotation = transform.rotation.eulerAngles;
-                    rotation.z += 180;
                     var randomVal = 0.02f;
-                    var hitEffect = Instantiate(HitEffect, hit.point + new Vector3(Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal)), Quaternion.Euler(rotation));
+                    var hitEffect = Instantiate(HitEffect, hit.point + new Vector3(Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal)), Quaternion.identity);
                     Destroy(gameObject);
-                    var enemy = hit.transform.parent?.GetComponent<IEnemy>();
+
+                    var enemy = hit.transform.GetComponent<BaseEnemy>();
                     if (enemy != null)
                     {
                         enemy.DamageTaken(Damage);
