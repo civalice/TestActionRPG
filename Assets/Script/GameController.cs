@@ -23,6 +23,13 @@ namespace Urxxxxx.GamePlay
         public Image HpImage;
         public Text StartText;
         public Text SkillText;
+
+        public GameObject SettingCanvas;
+        public InputField TxtMaxHp;
+        public InputField TxtMeleeDamage;
+        public InputField TxtMeleeForce;
+        public InputField TxtMaxSpawn;
+
         public bool IsStart => state == GameState.GamePlay;
 
         private GameState state = GameState.Start;
@@ -36,6 +43,10 @@ namespace Urxxxxx.GamePlay
         void Start()
         {
             StartText.gameObject.SetActive(true);
+            TxtMaxHp.text = PlayerMaxHp.ToString();
+            TxtMeleeDamage.text = MeleeDamage.ToString();
+            TxtMeleeForce.text = MeleeForce.ToString();
+            TxtMaxSpawn.text = MaxSpawn.ToString();
         }
 
         // Update is called once per frame
@@ -66,6 +77,7 @@ namespace Urxxxxx.GamePlay
         public void StartGame()
         {
             StartText.gameObject.SetActive(false);
+            SettingCanvas.SetActive(false);
             Player.Reset();
             SkillText.text = Player.GetSkillListName();
             SpawnManager.Reset();
@@ -78,6 +90,7 @@ namespace Urxxxxx.GamePlay
             SpawnManager.Clear();
             SpawnManager.StopSpawn();
             StartText.gameObject.SetActive(true);
+            SettingCanvas.SetActive(true);
             StartText.text = "GameOver\n Press Space to continue...";
             state = GameState.GameOver;
         }
@@ -86,5 +99,24 @@ namespace Urxxxxx.GamePlay
         {
             SpawnManager.Kill(obj);
         }
+
+        public void PlayerHpValueChange(string val)
+        {
+            Setting.PlayerMaxHp = int.Parse(val);
+        }
+
+        public void MeleeDamageValueChange(string val)
+        {
+            Setting.MeleeDamage = int.Parse(val);
+        }
+        public void MeleeForceValueChange(string val)
+        {
+            Setting.MeleeForce = float.Parse(val);
+        }
+        public void MaxSpawnValueChange(string val)
+        {
+            Setting.MaxSpawn = int.Parse(val);
+        }
+
     }
 }

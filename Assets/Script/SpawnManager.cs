@@ -25,7 +25,7 @@ namespace Urxxxxx.GamePlay
         {
             if (!IsStart) return;
             if (SpawnList.Count <= 0) return;
-            if (CurrentSpawnList.Count <= GameController.Instance.MaxSpawn)
+            if (CurrentSpawnList.Count < GameController.Instance.MaxSpawn)
             {
                 //Spawn from SpawnList
                 GameObject spawnPrefab = SpawnList.RandomItem();
