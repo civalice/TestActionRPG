@@ -17,6 +17,7 @@ namespace Urxxxxx.GamePlay
         public float BulletRange = 10;
         public float BulletAccuracy = 100f;
         public float Damage = 1;
+        public float Force = 0.1f;
 
         private Vector3 m_previousFramePosition;
 
@@ -59,6 +60,7 @@ namespace Urxxxxx.GamePlay
                     var enemy = hit.transform.GetComponent<BaseEnemy>();
                     if (enemy != null)
                     {
+                        enemy.ApplyForce(BulletDirection, Force);
                         enemy.DamageTaken(Damage);
                     }
                 }

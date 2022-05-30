@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Urxxxxx.GamePlay
 {
-
-    public class DummyBaseEnemy : BaseEnemy
+    public class DummyFollowEnemy : BaseEnemy
     {
+        public NavMeshAgent Agent;
+
         public float MaxHP = 30;
         protected float CurrentHP;
         private Rigidbody rigidBody;
@@ -25,26 +26,24 @@ namespace Urxxxxx.GamePlay
         {
             rigidBody.AddForce(direction * force, ForceMode.Impulse);
         }
-        protected override void Death()
-        {
-            base.Death();
-        }
 
-        void Awake()
+        public virtual void Awake()
         {
             rigidBody = GetComponent<Rigidbody>();
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
+            Agent = GetComponent<NavMeshAgent>();
             CurrentHP = MaxHP;
+        }
+        // Start is called before the first frame update
+        public virtual void Start()
+        {
+
         }
 
         // Update is called once per frame
-        void Update()
+        public virtual void Update()
         {
+            if (TargetObject != null)
+                Agent.destination = TargetObject.transform.position;
         }
     }
-
 }

@@ -19,6 +19,8 @@ namespace Urxxxxx.GamePlay
         public GameObject TriggerObject;
         public GameObject HitPrefabs;
         public int MeleeDamage = 5;
+        public float HitForce = 10f;
+        public float HitRange = 2f;
 
         void Awake()
         {
@@ -43,35 +45,18 @@ namespace Urxxxxx.GamePlay
 
         public void Hit()
         {
-            if (hitTarget != null)
+            bool isHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, HitRange, CollisionSystem.GetHitBoxLayerMask(Layer.PlayerAttackBox));
+
+            //Physics.BoxCast(transform.position, transform.localScale, transform.forward, out RaycastHit hit,
+            //    transform.rotation, HitRange, CollisionSystem.GetHitBoxLayerMask(Layer.PlayerAttackBox));
+            if (hit.collider != null)
             {
+                hitTarget = hit.collider;
                 AttackEnemy();
             }
             else
             {
                 isHitEnable = true;
-            }
-        }
-
-        private void OnTriggerEnter(Collider col)
-        {
-            int layerTarget = CollisionSystem.GetHitBoxLayerMask(gameObject.layer);
-            if ((1 << col.gameObject.layer & layerTarget) != 0)
-            {
-                hitTarget = col;
-                if (isHitEnable)
-                {
-                    AttackEnemy();
-                    hitTarget = null;
-                }
-            }
-        }
-
-        private void OnTriggerExit(Collider col)
-        {
-            if (col == hitTarget)
-            {
-                hitTarget = null;
             }
         }
 
@@ -86,6 +71,7 @@ namespace Urxxxxx.GamePlay
                     TriggerObject.transform.position + new Vector3(Random.Range(-randomVal, randomVal),
                         Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal)), Quaternion.identity);
                 enemy.DamageTaken(MeleeDamage);
+                enemy.ApplyForce(transform.forward, HitForce);
             }
         }
     }

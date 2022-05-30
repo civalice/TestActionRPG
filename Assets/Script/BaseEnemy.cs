@@ -6,7 +6,11 @@ namespace Urxxxxx.GamePlay
 {
     public abstract class BaseEnemy : MonoBehaviour
     {
+        public GameObject TargetObject;
+
         public virtual void DamageTaken(float damage) { }
+        public virtual void ApplyForce(Vector3 direction, float force) { }
+
         protected virtual void Death()
         {
             Destroy(gameObject);
