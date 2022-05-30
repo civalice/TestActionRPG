@@ -10,6 +10,7 @@ namespace Urxxxxx.GamePlay
         public NavMeshAgent Agent;
 
         public float MaxHP = 30;
+        public float Damage = 5;
         protected float CurrentHP;
         private Rigidbody rigidBody;
 
@@ -44,6 +45,15 @@ namespace Urxxxxx.GamePlay
         {
             if (TargetObject != null)
                 Agent.destination = TargetObject.transform.position;
+            if ((transform.position - TargetObject.transform.position).sqrMagnitude < 2)
+            {
+                var player = TargetObject.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.DamageTaken(Damage);
+                }
+                Destroy(gameObject);
+            }
         }
     }
 }

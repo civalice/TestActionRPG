@@ -57,7 +57,7 @@ namespace Urxxxxx.GamePlay
                     var hitEffect = Instantiate(HitEffect, hit.point + new Vector3(Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal), Random.Range(-randomVal, randomVal)), Quaternion.identity);
                     Destroy(gameObject);
 
-                    var enemy = hit.transform.GetComponent<BaseEnemy>();
+                    var enemy = hit.transform.GetComponent<IHitBoxObject>();
                     if (enemy != null)
                     {
                         enemy.ApplyForce(BulletDirection, Force);

@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPGCharacterAnims;
+using RPGCharacterAnims.Actions;
+using RPGCharacterAnims.Lookups;
 using UnityEngine;
 
 namespace Urxxxxx.GamePlay
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IHitBoxObject
     {
+        RPGCharacterController rpgCharacterController;
+
+        public float CurrentHp = 100;
         public RangeWeapon Weapon;
 
         public void SetTargetPosition(Vector3 target)
@@ -19,6 +25,10 @@ namespace Urxxxxx.GamePlay
             Weapon.ResetTarget();
         }
 
+        void Awake()
+        {
+            rpgCharacterController = GetComponent<RPGCharacterController>();
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -29,6 +39,38 @@ namespace Urxxxxx.GamePlay
         void Update()
         {
             Weapon.UpdateWeapon();
+        }
+
+        public virtual void DamageTaken(float damage)
+        {
+            CurrentHp -= damage;
+            if (CurrentHp <= 0)
+            {
+                Death();
+                return;
+            }
+
+            if (rpgCharacterController.HandlerExists(HandlerTypes.GetHit))
+            {
+                rpgCharacterController.StartAction(HandlerTypes.GetHit, new HitContext());
+            }
+
+        }
+
+        public virtual void ApplyForce(Vector3 direction, float force)
+        {
+
+        }
+
+        protected virtual void Death()
+        {
+            if (rpgCharacterController.HandlerExists(HandlerTypes.Death))
+            {
+                if (rpgCharacterController.CanStartAction(HandlerTypes.Death))
+                {
+                    rpgCharacterController.StartAction(HandlerTypes.Death);
+                }
+            }
         }
     }
 }

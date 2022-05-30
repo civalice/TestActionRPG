@@ -62,7 +62,7 @@ namespace Urxxxxx.GamePlay
 
         private void AttackEnemy()
         {
-            var enemy = hitTarget.GetComponent<BaseEnemy>();
+            var enemy = hitTarget.GetComponent<IHitBoxObject>();
             if (enemy != null)
             {
                 var randomVal = 0.02f;

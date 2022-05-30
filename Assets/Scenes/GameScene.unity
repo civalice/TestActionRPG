@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5cba4445f0bde46a88d670755bf9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentHp: 100
   Weapon: {fileID: 1302578134}
 --- !u!114 &413095621
 MonoBehaviour:

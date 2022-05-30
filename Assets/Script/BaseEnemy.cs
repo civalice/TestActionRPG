@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Urxxxxx.GamePlay
 {
-    public abstract class BaseEnemy : MonoBehaviour
+    public abstract class BaseEnemy : MonoBehaviour, IHitBoxObject
     {
         public GameObject TargetObject;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Urxxxxx.Util;
 
 namespace Urxxxxx.GamePlay
 {
@@ -46,6 +47,7 @@ namespace Urxxxxx.GamePlay
                 m_timing -= FireRate;
                 var bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
                 var bulletComponent = bullet.GetComponent<SimpleBullet>();
+                bullet.gameObject.layer = Layer.PlayerAttackBox;
                 bulletComponent.SetBulletTarget(transform.position, TargetPosition);
             }
         }
