@@ -18,9 +18,9 @@ namespace Urxxxxx.GamePlay
 
         public GameObject TriggerObject;
         public GameObject HitPrefabs;
-        public int MeleeDamage = 5;
-        public float HitForce = 10f;
-        public float HitRange = 2f;
+        public int MeleeDamage => GameController.Instance.MeleeDamage;
+        public float HitForce => GameController.Instance.MeleeForce;
+        public float HitRange => GameController.Instance.MeleeRange;
 
         void Awake()
         {

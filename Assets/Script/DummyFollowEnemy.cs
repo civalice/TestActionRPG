@@ -11,6 +11,7 @@ namespace Urxxxxx.GamePlay
 
         public float MaxHP = 30;
         public float Damage = 5;
+        public float BombRange = 1.2f;
         protected float CurrentHP;
         private Rigidbody rigidBody;
 
@@ -45,7 +46,11 @@ namespace Urxxxxx.GamePlay
         {
             if (TargetObject != null)
                 Agent.destination = TargetObject.transform.position;
-            if ((transform.position - TargetObject.transform.position).sqrMagnitude < 2)
+            Vector3 position = transform.position;
+            Vector3 targetPosition = TargetObject.transform.position;
+            position.y = 0;
+            targetPosition.y = 0;
+            if ((position - targetPosition).sqrMagnitude < BombRange * BombRange)
             {
                 var player = TargetObject.GetComponent<Player>();
                 if (player != null)

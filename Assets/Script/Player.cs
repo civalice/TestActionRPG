@@ -4,6 +4,7 @@ using RPGCharacterAnims;
 using RPGCharacterAnims.Actions;
 using RPGCharacterAnims.Lookups;
 using UnityEngine;
+using Urxxxxx.Util;
 
 namespace Urxxxxx.GamePlay
 {
@@ -34,7 +35,7 @@ namespace Urxxxxx.GamePlay
         // Start is called before the first frame update
         void Start()
         {
-
+            Weapon.SetBulletLayer(Layer.PlayerAttackBox);
         }
 
         // Update is called once per frame

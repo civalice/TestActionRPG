@@ -596,9 +596,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerObject: {fileID: 1687558674}
   HitPrefabs: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
-  MeleeDamage: 3
-  HitForce: 10
-  HitRange: 2
 --- !u!1 &444819115
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,6 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnList:
   - {fileID: 3005247196417351967, guid: 1d9fc666848722d4f99eefc099562226, type: 3}
+  - {fileID: 3825425499052398790, guid: 963edbb48dd24cb4e818c8eaf3e7e75a, type: 3}
+  - {fileID: 2067707406775620656, guid: d0d04b9eae8e9ce4288f84a3c329b874, type: 3}
   Player: {fileID: 413095608}
   CurrentSpawnList: []
   IsStart: 0

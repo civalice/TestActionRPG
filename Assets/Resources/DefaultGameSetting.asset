@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpawn: 3
   PlayerMaxHp: 100
-  MeleeDamage: 5
-  MeleeForce: 2
+  MeleeDamage: 20
+  MeleeForce: 200
   MeleeRange: 2
+  FireRate: 0.04
   BaseDamage: 1
   BaseForce: 2
   BaseBulletSpeed: 60
