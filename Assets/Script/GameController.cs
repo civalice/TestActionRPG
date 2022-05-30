@@ -22,6 +22,7 @@ namespace Urxxxxx.GamePlay
 
         public Image HpImage;
         public Text StartText;
+        public Text SkillText;
         public bool IsStart => state == GameState.GamePlay;
 
         private GameState state = GameState.Start;
@@ -66,6 +67,7 @@ namespace Urxxxxx.GamePlay
         {
             StartText.gameObject.SetActive(false);
             Player.Reset();
+            SkillText.text = Player.GetSkillListName();
             SpawnManager.Reset();
             SpawnManager.StartSpawn();
             state = GameState.GamePlay;

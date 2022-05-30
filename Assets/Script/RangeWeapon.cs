@@ -17,10 +17,50 @@ namespace Urxxxxx.GamePlay
 
         private bool m_hasTarget = false;
 
+        private List<BaseSkill> skillList = new List<BaseSkill>();
+
+        //Skill Attribute
+        public int Accuracy = 92;
+        public float DamageMultiplier = 1;
+        public float AddForce = 0;
+
+        private int initialAccuracy;
+
+        void Awake()
+        {
+            initialAccuracy = Accuracy;
+        }
+
         // Start is called before the first frame update
         void Start()
         {
+        }
 
+        public void Reset()
+        {
+            Accuracy = initialAccuracy;
+            DamageMultiplier = 1;
+            AddForce = 0;
+        }
+
+        public void SetRangeSkill(BaseSkill skill)
+        {
+            skill.ApplyRangeAttribute(this);
+        }
+
+        public void SetAccuracy(int val)
+        {
+            Accuracy = val;
+        }
+
+        public void SetDamageMultiplier(float val)
+        {
+            DamageMultiplier = val;
+        }
+
+        public void AdditionalForce(float val)
+        {
+            AddForce = val;
         }
 
         public void SetBulletLayer(int layer)
@@ -54,6 +94,9 @@ namespace Urxxxxx.GamePlay
                 var bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
                 var bulletComponent = bullet.GetComponent<SimpleBullet>();
                 bullet.gameObject.layer = bulletLayer;
+                bullet.BulletAccuracy = Accuracy;
+                bullet.Damage *= DamageMultiplier;
+                bullet.Force += AddForce;
                 bulletComponent.SetBulletTarget(transform.position, TargetPosition);
             }
         }
